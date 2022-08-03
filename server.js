@@ -5,13 +5,13 @@ const app = express()
 const cors = require('cors');
 app.use(cors());
 const weatherData = require('./data/weather.json')
-// const PORT = (process.env.PORT || 3001)
+const PORT = process.env.PORT
 const { weatherSearch } = require('./weather.js')
 const { movieSearch } = require('./movies.js')
 
 
-app.listen(3001, () => {
-    console.log(`3001 Radio!`)
+app.listen(PORT, () => {
+    console.log(`${PORT} Radio!`)
 })
 
 app.get('/weather', weatherSearch)
