@@ -5,7 +5,7 @@ const app = express()
 const cors = require('cors');
 app.use(cors());
 const weatherData = require('./data/weather.json')
-const PORT = (process.env.PORT || 3001)
+// const PORT = (process.env.PORT || 3001)
 const { weatherSearch } = require('./weather.js')
 const { movieSearch } = require('./movies.js')
 
