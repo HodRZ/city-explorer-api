@@ -17,3 +17,7 @@ app.listen(3001, () => {
 app.get('/weather', weatherSearch)
 
 app.get('/movies', movieSearch)
+
+app.get('/', (req, res) => {
+    res.send('welcome')
+})
