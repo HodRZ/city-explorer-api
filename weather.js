@@ -1,17 +1,24 @@
+'use strict'
 const axios = require('axios')
 
+const cache = {};
 
 async function weatherSearch(req, res) {
-    const weatherData = await axios.get(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${req.query.lat}&lon=${req.query.lon}&key=${process.env.WEATHER_KEY}`)
-    try {
-        const result = []
-        weatherData.data.data.forEach((day) => {
-            result.push(new Forecast(day))
-        })
-        res.send(result)
-    } catch (error) {
-        console.log(error, 'error :(')
-        res.status(500).send('Something went wrong.')
+    if (cache[req.query.searchQuery] !== undefined) {
+        res.send(cache[req.query.searchQuery]);
+    } else {
+        const weatherData = await axios.get(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${req.query.lat}&lon=${req.query.lon}&key=${process.env.WEATHER_KEY}`)
+        try {
+            const result = []
+            weatherData.data.data.forEach((day) => {
+                result.push(new Forecast(day))
+            })
+            cache[req.query.searchQuery] = result;
+            res.send(result)
+        } catch (error) {
+            console.log(error, 'error :(')
+            res.status(500).send('Something went wrong.')
+        }
     }
 }
 
