@@ -4,7 +4,7 @@ const express = require("express")
 const app = express()
 const cors = require('cors');
 app.use(cors());
-const weatherData = require('./data/weather.json')
+// const weatherData = require('./data/weather.json')
 const PORT = process.env.PORT
 const { weatherSearch } = require('./weather.js')
 const { movieSearch } = require('./movies.js')
